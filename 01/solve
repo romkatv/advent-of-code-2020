@@ -1,0 +1,17 @@
+#!/usr/bin/env zsh
+
+emulate -L zsh
+setopt no_aliases err_exit no_unset extended_glob pipe_fail warn_create_global
+
+local -i n
+local -A set
+while IFS= read -r n; do
+  local -i m='2020 - n'
+  if (( $+set[$m] )); then
+    print -r -- $(( n * m ))
+    return
+  fi
+  set[$n]=
+done
+
+exit 1

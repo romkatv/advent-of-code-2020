@@ -1,0 +1,21 @@
+#!/usr/bin/env zsh
+
+emulate -L zsh
+setopt no_aliases err_exit no_unset extended_glob pipe_fail warn_create_global
+
+local -a set
+set=($(<&0))
+local -A set=(${set:^set})
+
+local -i n m
+for n in $set; do
+  for m in $set; do
+    local -i k='2020 - n - m'
+    if (( $+set[$k] )); then
+      print -r -- $(( n * m * k ))
+      return
+    fi
+  done
+done
+
+exit 1
