@@ -3,14 +3,18 @@
 emulate -L zsh
 setopt no_aliases err_exit no_unset extended_glob pipe_fail warn_create_global
 
-local -a set
-set=($(<&0))
-local -A set=(${set:^set})
+local -a v
+v=($(<&0))
+(( $#v > 2 ))
 
-local -i n m
-for n in $set; do
-  for m in $set; do
-    local -i k='2020 - n - m'
+local -a idx=({1..$#v})
+local -A set=(${v:^idx})
+(( $#set == $#v ))
+
+local -i n m k
+for n in $v[1,-3]; do
+  for m in $v[set[$n]+1,-2]; do
+    k='2020 - n - m'
     if (( $+set[$k] )); then
       print -r -- $(( n * m * k ))
       return
