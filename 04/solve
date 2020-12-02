@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+
+emulate -L zsh
+setopt no_aliases err_exit no_unset extended_glob pipe_fail warn_create_global
+
+local c pass
+local -i lo hi res
+while IFS='- :' read -r lo hi c pass; do
+  [[ ${pass[lo]/$c}${pass[hi]/$c} == ? ]] && (( ++res ))
+done
+
+print -r -- $res
