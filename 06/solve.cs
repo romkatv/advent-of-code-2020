@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -10,7 +10,7 @@ string[] track = File.ReadAllLines("input");
 Debug.Assert(track.Length > 0);
 Debug.Assert(track[0].Length > 0);
 Debug.Assert(track.All(s => s.Length == track[0].Length));
-Debug.Assert(track.All(s => s.All(c => ".#".Contains(c))));
+Debug.Assert(track.All(s => s.All(c => c is '.' or '#')));
 
 long Descend(Slope s) {
   long trees = 0;
