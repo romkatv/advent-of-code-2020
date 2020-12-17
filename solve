@@ -32,9 +32,9 @@ local task pids=()
 for task; do
   cd -q -- $dir/$task
   if (( ARGC > 1 )); then
-    ./solve <input >answer 2>stderr.log &
+    ./solve </dev/null >answer 2>stderr.log &
   else
-    ./solve <input 3>&2 >answer 2>&3 2>stderr.log &
+    ./solve </dev/null 3>&2 >answer 2>&3 2>stderr.log &
   fi
   pids+=$!
 done >/dev/null
